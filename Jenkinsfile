@@ -1,21 +1,51 @@
-pipeline{
+pipeline {
     agent any
     
-    
-stages{
-    stage("Built Stage")
-    {
-        steps{
-           echo "your build is ready" 
-        }  
-       
+    environment {
+        DIRECTORY_PATH = 'https://github.com/yourusername/your-repo' 
+        TESTING_ENVIRONMENT = 'Junit'
+        PRODUCTION_ENVIRONMENT = 'Ansh' 
     }
     
-    stage("Deploy stage")
-    {
-        steps{
-            echo "your deploy is complete"
+    stages {
+        stage('Build') {
+            steps {
+                echo "Fetch the source code from the directory path specified by the environment variable: ${env.DIRECTORY_PATH}"
+                echo "Compile the code and generate any necessary artifacts"
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo "Unit tests"
+                echo "Integration tests"
+            }
+        }
+        
+        stage('Code Quality Check') {
+            steps {
+                echo "Check the quality of the code"
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo "Deploy the application to the testing environment specified by the environment variable: ${env.TESTING_ENVIRONMENT}"
+            }
+        }
+        
+        stage('Approval') {
+            steps {
+                echo "Waiting for manual approval..."
+                sleep(time: 10, unit: 'SECONDS') // Simulate manual approval with a 10-second pause
+                echo "Approval received. Proceeding to production deployment."
+            }
+        }
+        
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the code to the production environment: ${env.PRODUCTION_ENVIRONMENT}"
+            }
         }
     }
-}
 }
