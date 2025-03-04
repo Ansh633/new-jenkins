@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DIRECTORY_PATH = 'https://github.com/yourusername/your-repo' 
+        DIRECTORY_PATH = 'https://github.com/yourusername/new-jenkins' 
         TESTING_ENVIRONMENT = 'Junit'
         PRODUCTION_ENVIRONMENT = 'Ansh' 
     }
